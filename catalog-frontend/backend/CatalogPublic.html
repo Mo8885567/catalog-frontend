@@ -3987,6 +3987,18 @@
         return "https://lh3.googleusercontent.com/d/" + id + "=w500";
       }
 
+      // ── نسخة أصغر مخصوصة لصورة الكارت في الشبكة ───────────────
+      // it.image_url متخزن بمقاس =w500 (مناسب للمودال/المعرض)، لكن
+      // مربع الكارت نفسه أصغر بكتير (~136px)، فطلب نفس الـ 500px لكل
+      // كارت في الصفحة (ممكن تكون 15+ صورة مرة واحدة) بيبقى استهلاك
+      // بيانات وطلبات زيادة من غير داعي وبيبطّئ التحميل الأول للكتالوج.
+      // بنستبدل الرقم بمقاس أصغر بس لعرض الشبكة، ونسيب باقي الاستخدامات
+      // (المعرض، السلة) على المقاس الأصلي عشان الجودة تفضل كويسة.
+      function _gridThumbUrl(url) {
+        if (!url) return url;
+        return url.replace(/=w\d+$/, "=w260");
+      }
+
       // ── Boot ─────────────────────────────────────────────────────
       console.log("CatalogPublic build: 2026-07-17-v3 (add-to-cart debug)");
       window.addEventListener("DOMContentLoaded", function () {
@@ -4438,7 +4450,10 @@
         }
       }
       var _cardRenderIndex = 0;
-      var _EAGER_IMG_COUNT = 8; /* عدد الصور اللي تتحمل فورًا من غير lazy (أول صفوف ظاهرة في الشاشة) */
+      /* عدد الصور اللي تتحمل فورًا (eager/high-priority) بدل ما تستنى الـ lazy —
+         على الموبايل بيبقى عمود واحد فبس 2-3 كروت ظاهرة فعليًا فوق الشاشة،
+         فمفيش داعي نحمّل 8 صور بأولوية عالية ونزاحم أول كروت ظاهرة فعلاً */
+      var _EAGER_IMG_COUNT = window.innerWidth <= 768 ? 4 : 8;
 
       // ── Grid ─────────────────────────────────────────────────────
       function _buildGrid(items) {
@@ -4493,7 +4508,7 @@
         _cardRenderIndex++;
         var imgHtml = it.image_url
           ? '<img src="' +
-            _esc(it.image_url) +
+            _esc(_gridThumbUrl(it.image_url)) +
             '" class="card-img" ' +
             (_isEager
               ? 'loading="eager" fetchpriority="high"'

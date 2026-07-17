@@ -1179,12 +1179,22 @@
         background: var(--border2);
       }
 
+      /* Colors + Price on one row */
+      .card-colors-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 4px;
+        flex-wrap: wrap;
+      }
+
       /* Colors */
       .card-colors {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         gap: 4px;
-        margin-top: 2px;
       }
       .color-dot {
         width: 18px;
@@ -1322,8 +1332,8 @@
         font-size: 13px;
         font-weight: 800;
         color: #92400e;
-        margin-top: 4px;
         width: fit-content;
+        flex-shrink: 0;
       }
 
       /* Card footer */
@@ -2748,33 +2758,40 @@
           justify-content: center;
         }
         .card-name {
-          font-size: 14px !important;
+          font-size: 17px !important;
           font-weight: 700 !important;
-          line-height: 1.3 !important;
+          line-height: 1.35 !important;
         }
         .card-code-badge {
-          font-size: 10px !important;
-          padding: 2px 7px !important;
+          font-size: 11px !important;
+          padding: 3px 8px !important;
         }
         .card-desc {
-          font-size: 12px !important;
+          font-size: 13.5px !important;
           -webkit-line-clamp: 2 !important;
         }
         .card-group {
-          font-size: 11px !important;
+          font-size: 12.5px !important;
+        }
+        .card-colors-row {
+          margin-top: 4px;
         }
         .color-dot {
-          width: 16px;
-          height: 16px;
+          width: 28px !important;
+          height: 28px !important;
+          border-width: 3px !important;
+        }
+        .colors-more {
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 11px !important;
         }
         .card-colors {
-          gap: 4px;
+          gap: 6px;
         }
         .card-price {
-          font-size: 13px !important;
-          padding: 4px 10px !important;
-          margin-top: 2px;
-          align-self: flex-end; /* السعر يبقى في الجهة التانية بعيد عن الصورة */
+          font-size: 15px !important;
+          padding: 5px 12px !important;
         }
 
         /* Footer: صف كامل العرض تحت الصورة والمعلومات — زر عادي الارتفاع
@@ -2874,7 +2891,15 @@
           min-height: 0;
         }
         .card-name {
-          font-size: 13px !important;
+          font-size: 15.5px !important;
+        }
+        .color-dot {
+          width: 24px !important;
+          height: 24px !important;
+        }
+        .colors-more {
+          width: 24px !important;
+          height: 24px !important;
         }
         .btn-order {
           font-size: 11px !important;
@@ -4001,6 +4026,18 @@
         return "https://lh3.googleusercontent.com/d/" + id + "=w500";
       }
 
+      // ── نسخة أصغر مخصوصة لصورة الكارت في الشبكة ───────────────
+      // it.image_url متخزن بمقاس =w500 (مناسب للمودال/المعرض)، لكن
+      // مربع الكارت نفسه أصغر بكتير (~136px)، فطلب نفس الـ 500px لكل
+      // كارت في الصفحة (ممكن تكون 15+ صورة مرة واحدة) بيبقى استهلاك
+      // بيانات وطلبات زيادة من غير داعي وبيبطّئ التحميل الأول للكتالوج.
+      // بنستبدل الرقم بمقاس أصغر بس لعرض الشبكة، ونسيب باقي الاستخدامات
+      // (المعرض، السلة) على المقاس الأصلي عشان الجودة تفضل كويسة.
+      function _gridThumbUrl(url) {
+        if (!url) return url;
+        return url.replace(/=w\d+$/, "=w260");
+      }
+
       // ── Boot ─────────────────────────────────────────────────────
       console.log("CatalogPublic build: 2026-07-17-v3 (add-to-cart debug)");
       // ── لو الرابط فيه ?link=TOKEN (رابط اتعمل من شاشة "روابط الكتالوج")،
@@ -4485,7 +4522,10 @@
         }
       }
       var _cardRenderIndex = 0;
-      var _EAGER_IMG_COUNT = 8; /* عدد الصور اللي تتحمل فورًا من غير lazy (أول صفوف ظاهرة في الشاشة) */
+      /* عدد الصور اللي تتحمل فورًا (eager/high-priority) بدل ما تستنى الـ lazy —
+         على الموبايل بيبقى عمود واحد فبس 2-3 كروت ظاهرة فعليًا فوق الشاشة،
+         فمفيش داعي نحمّل 8 صور بأولوية عالية ونزاحم أول كروت ظاهرة فعلاً */
+      var _EAGER_IMG_COUNT = window.innerWidth <= 768 ? 4 : 8;
 
       // ── Grid ─────────────────────────────────────────────────────
       function _buildGrid(items) {
@@ -4540,7 +4580,7 @@
         _cardRenderIndex++;
         var imgHtml = it.image_url
           ? '<img src="' +
-            _esc(it.image_url) +
+            _esc(_gridThumbUrl(it.image_url)) +
             '" class="card-img" ' +
             (_isEager
               ? 'loading="eager" fetchpriority="high"'
@@ -4649,10 +4689,12 @@
           '<div class="card-group">' +
           _esc(_groupName(it.group)) +
           "</div>" +
-          (colorDots
-            ? '<div class="card-colors">' + colorDots + "</div>"
+          (colorDots || priceHtml
+            ? '<div class="card-colors-row">' +
+              (colorDots ? '<div class="card-colors">' + colorDots + "</div>" : "<span></span>") +
+              priceHtml +
+              "</div>"
             : "") +
-          priceHtml +
           "</div>" +
           '<div class="card-footer">' +
           '<button class="' +
