@@ -379,6 +379,28 @@
       .theme-toggle-btn.spin i {
         transform: rotate(180deg);
       }
+      /* زرار البحث المخصص للموبايل — مخفي على الديسكتوب لأن مربع
+         البحث الكامل ظاهر أصلاً جنب اللوجو */
+      .mobile-search-toggle-btn {
+        display: none;
+        width: 38px;
+        height: 38px;
+        border-radius: var(--radius-sm);
+        border: 1.5px solid var(--border);
+        background: var(--surface2);
+        color: var(--text2);
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all var(--transition);
+      }
+      .mobile-search-toggle-btn:hover,
+      .mobile-search-toggle-btn.active {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--primary-soft);
+      }
       .view-toggle {
         display: flex;
         background: var(--surface2);
@@ -2573,9 +2595,26 @@
           min-width: 44px;
           min-height: 44px;
         }
+        /* البحث بقى زرار أيقونة بس بدل صندوق مضغوط بيبين نص مقطوع —
+           بيتفتح كشريط كامل العرض تحت الهيدر لما تدوس عليه */
+        .mobile-search-toggle-btn {
+          display: flex;
+        }
         .search-wrap {
-          flex: 1;
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          left: 0;
           max-width: none;
+          padding: 10px 12px;
+          background: var(--surface);
+          border-bottom: 1px solid var(--border);
+          box-shadow: 0 10px 26px rgba(13, 21, 38, 0.14);
+          z-index: 250;
+        }
+        .search-wrap.mobile-search-open {
+          display: flex;
         }
         .mobile-filter-btn {
           display: flex;
@@ -2652,14 +2691,15 @@
            كان بيمدّد زرار "اطلب الآن" لارتفاع الكارت كله (شكل غير احترافي) */
         .card {
           display: grid !important;
-          grid-template-columns: 112px 1fr;
-          grid-template-rows: minmax(112px, auto) auto;
+          grid-template-columns: 136px 1fr;
+          grid-template-rows: minmax(156px, auto) auto;
           grid-template-areas: "img body" "footer footer";
           min-height: 0;
           align-items: stretch;
         }
 
-        /* الصورة: مربع ثابت على اليمين */
+        /* الصورة: مستطيل أكبر على اليمين بدل المربع القديم — بياخد
+           مساحة أكتر ويستحوذ على الصورة بشكل أوضح */
         .card-img-wrap {
           grid-area: img;
           width: 100% !important;
@@ -2667,7 +2707,7 @@
           flex-shrink: 0 !important;
           padding-top: 0 !important;
           position: relative !important;
-          min-height: 112px;
+          min-height: 156px;
           overflow: hidden;
         }
         .card-img-wrap .card-img {
@@ -2675,7 +2715,7 @@
           inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
         }
         .card-img-wrap .card-img-ph {
           position: absolute;
@@ -2734,6 +2774,7 @@
           font-size: 13px !important;
           padding: 4px 10px !important;
           margin-top: 2px;
+          align-self: flex-end; /* السعر يبقى في الجهة التانية بعيد عن الصورة */
         }
 
         /* Footer: صف كامل العرض تحت الصورة والمعلومات — زر عادي الارتفاع
@@ -2825,10 +2866,11 @@
           padding: 0 10px 120px !important;
         }
         .card-img-wrap {
-          min-height: 100px;
+          min-height: 130px;
         }
         .card {
-          grid-template-columns: 100px 1fr;
+          grid-template-columns: 118px 1fr;
+          grid-template-rows: minmax(130px, auto) auto;
           min-height: 0;
         }
         .card-name {
@@ -3513,6 +3555,14 @@
         </div>
 
         <div class="header-actions">
+          <button
+            class="mobile-search-toggle-btn"
+            onclick="toggleMobileSearch()"
+            id="mobile-search-toggle-btn"
+            title="بحث"
+          >
+            <i class="ti ti-search" style="font-size: 16px"></i>
+          </button>
           <button
             class="theme-toggle-btn"
             onclick="toggleTheme()"
@@ -4312,6 +4362,31 @@
         document.body.style.overflow = shouldOpen ? "hidden" : "";
         if (btn) btn.classList.toggle("filter-active", shouldOpen);
       }
+
+      // فتح/قفل شريط البحث على الموبايل (بيبان تحت الهيدر كامل العرض)
+      function toggleMobileSearch(forceClose) {
+        var wrap = document.querySelector(".search-wrap");
+        var btn = document.getElementById("mobile-search-toggle-btn");
+        if (!wrap) return;
+        var isOpen = wrap.classList.contains("mobile-search-open");
+        var shouldOpen = forceClose ? false : !isOpen;
+        wrap.classList.toggle("mobile-search-open", shouldOpen);
+        if (btn) btn.classList.toggle("active", shouldOpen);
+        if (shouldOpen) {
+          setTimeout(function () {
+            var inp = document.getElementById("pub-search");
+            if (inp) inp.focus();
+          }, 60);
+        }
+      }
+      document.addEventListener("click", function (e) {
+        var wrap = document.querySelector(".search-wrap");
+        if (!wrap || !wrap.classList.contains("mobile-search-open")) return;
+        if (wrap.contains(e.target)) return;
+        if (e.target.closest && e.target.closest("#mobile-search-toggle-btn"))
+          return;
+        toggleMobileSearch(true);
+      });
 
       // تحديث شريط الفلاتر النشطة على الموبايل
       function _updateActiveFilterBar() {
@@ -5692,6 +5767,79 @@
         document.getElementById("cart-overlay").classList.remove("open");
         document.body.style.overflow = "";
       }
+
+      /* ══════════════════════════════════════════════════════
+         إغلاق الشاشات المنبثقة (تفاصيل الصنف / السلة) بالسحب
+         باللمس — بيسمح للمستخدم يسحب اللوحة ناحية اليسار (نفس
+         اتجاه الاختفاء) عشان يقفلها، بدل ما يضطر يدوس على X
+         ══════════════════════════════════════════════════════ */
+      function _enableSwipeToClose(panelEl, closeFn) {
+        if (!panelEl || panelEl._swipeBound) return;
+        panelEl._swipeBound = true;
+
+        var startX = 0,
+          startY = 0,
+          dragX = 0,
+          dragging = false,
+          isHorizontal = null;
+
+        panelEl.addEventListener(
+          "touchstart",
+          function (e) {
+            if (e.touches.length !== 1) return;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            dragX = 0;
+            dragging = true;
+            isHorizontal = null;
+            panelEl.style.transition = "none";
+          },
+          { passive: true }
+        );
+
+        panelEl.addEventListener(
+          "touchmove",
+          function (e) {
+            if (!dragging) return;
+            var dx = e.touches[0].clientX - startX;
+            var dy = e.touches[0].clientY - startY;
+
+            if (isHorizontal === null) {
+              isHorizontal = Math.abs(dx) > Math.abs(dy) + 6;
+              if (!isHorizontal) {
+                dragging = false;
+                panelEl.style.transition = "";
+                return;
+              }
+            }
+            if (!isHorizontal) return;
+
+            // اللوحة بتختفي ناحية الشمال، فالسحب المسموح بيه بس في
+            // نفس الاتجاه ده (dx سالبة)؛ لو سحب بالعكس بنقاومه شوية
+            var moved = dx < 0 ? dx : dx * 0.2;
+            dragX = moved;
+            panelEl.style.transform = "translateX(" + moved + "px)";
+            e.preventDefault();
+          },
+          { passive: false }
+        );
+
+        function endDrag() {
+          if (!dragging) return;
+          dragging = false;
+          panelEl.style.transition = "";
+          panelEl.style.transform = "";
+          var threshold = Math.min(120, panelEl.offsetWidth * 0.28);
+          if (dragX < -threshold) closeFn();
+        }
+        panelEl.addEventListener("touchend", endDrag);
+        panelEl.addEventListener("touchcancel", endDrag);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        _enableSwipeToClose(document.getElementById("item-drawer"), closeDrawer);
+        _enableSwipeToClose(document.getElementById("cart-panel"), closeCartPanel);
+      });
 
       function sendCartWhatsApp() {
         if (!CART.length) return;
