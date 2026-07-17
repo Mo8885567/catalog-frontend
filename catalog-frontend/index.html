@@ -1349,7 +1349,6 @@
         google.script.run
           .withSuccessHandler(function (res) {
             var cs = (res && res.companySettings) || {};
-            if (cs.logo_url) _setFavicon(_fixDriveUrl(cs.logo_url));
             if (cs.company_name)
               document.title = "إدارة الكتالوج — " + cs.company_name;
           })
