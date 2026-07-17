@@ -8,25 +8,26 @@
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <link rel="dns-prefetch" href="https://lh3.googleusercontent.com" />
     <title>كتالوج كيرو مان</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/logo/favicon-192.png" />
-    <link rel="shortcut icon" href="assets/logo/favicon-32.png" />
-    <link rel="apple-touch-icon" href="assets/logo/favicon-192.png" />
-    <meta
-      name="description"
-      content="كتالوج المنتجات الرسمي — Kero Man"
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/logo/favicon-32.png"
     />
     <link
-      href="assets/fonts/fonts.css"
-      rel="stylesheet"
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/logo/favicon-192.png"
     />
+    <link rel="shortcut icon" href="assets/logo/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/logo/favicon-192.png" />
+    <meta name="description" content="كتالوج المنتجات الرسمي — Kero Man" />
+    <link href="assets/fonts/fonts.css" rel="stylesheet" />
     <!-- ═══════════════════════════════════════════════════════
          Tabler Icons — مستضافة محليًا (assets/icons) بدل CDN
          ═══════════════════════════════════════════════════════ -->
-    <link
-      rel="stylesheet"
-      href="assets/icons/tabler-icons.min.css"
-    />
+    <link rel="stylesheet" href="assets/icons/tabler-icons.min.css" />
 
     <style>
       /* ===== RESET & VARIABLES ===== */
@@ -3429,7 +3430,8 @@
     <script>
       // رابط نشر الـ Apps Script — مثبت هنا عشان يشتغل لأي حد يفتح
       // اللينك من غير ما يحتاج يعمل "إعداد اتصال" بنفسه على جهازه
-      window.GAS_URL = "https://script.google.com/macros/s/AKfycbwX2P9V9xyw-0u58666HcB2Uq_b5vsjezW2uPI0TgMYGIWysUoEwrGs_1F3qZCCl1baAw/exec";
+      window.GAS_URL =
+        "https://script.google.com/macros/s/AKfycbwX2P9V9xyw-0u58666HcB2Uq_b5vsjezW2uPI0TgMYGIWysUoEwrGs_1F3qZCCl1baAw/exec";
     </script>
     <script src="src/api/client.js"></script>
 
@@ -3738,7 +3740,7 @@
             <div class="loader-dot"></div>
           </div>
           <div class="loading-text">جاري تحميل الكتالوج...</div>
-          <div class="loading-sub">Kero Man — كتالوج المنتجات الرسمي</div>
+          <div class="loading-sub">كيرو مان _ كتالوج المنتجات الرسمي</div>
           <div class="loader-bar-wrap">
             <div class="loader-bar"></div>
           </div>
@@ -3892,7 +3894,9 @@
          السيرفر زي نسخة Apps Script) — نفس أسماء الباراميترات القديمة
          بالظبط عشان أي رابط اتبعت زمان يفضل شغال ===== */
       function _flagClient(v) {
-        var s = String(v == null ? "" : v).trim().toLowerCase();
+        var s = String(v == null ? "" : v)
+          .trim()
+          .toLowerCase();
         return s === "1" || s === "true" || s === "yes" ? "1" : "0";
       }
       var _qs = new URLSearchParams(window.location.search);
@@ -4304,25 +4308,33 @@
 
         // Tabler icons + colors — نفس نمط النظام الرئيسي
         var ICON_DEFS = [
-          { icon: "ti-box",            cls: "sib-blue"   },
-          { icon: "ti-tag",            cls: "sib-purple" },
-          { icon: "ti-tool",           cls: "sib-gray"   },
-          { icon: "ti-bolt",           cls: "sib-amber"  },
-          { icon: "ti-palette",        cls: "sib-teal"   },
-          { icon: "ti-building",       cls: "sib-blue"   },
-          { icon: "ti-bulb",           cls: "sib-amber"  },
-          { icon: "ti-settings",       cls: "sib-gray"   },
+          { icon: "ti-box", cls: "sib-blue" },
+          { icon: "ti-tag", cls: "sib-purple" },
+          { icon: "ti-tool", cls: "sib-gray" },
+          { icon: "ti-bolt", cls: "sib-amber" },
+          { icon: "ti-palette", cls: "sib-teal" },
+          { icon: "ti-building", cls: "sib-blue" },
+          { icon: "ti-bulb", cls: "sib-amber" },
+          { icon: "ti-settings", cls: "sib-gray" },
           { icon: "ti-clipboard-list", cls: "sib-purple" },
-          { icon: "ti-shopping-cart",  cls: "sib-green"  },
+          { icon: "ti-shopping-cart", cls: "sib-green" },
         ];
         function _iconBadge(idx) {
           var d = ICON_DEFS[idx % ICON_DEFS.length];
-          return '<span class="sidebar-icon-badge ' + d.cls + '"><i class="ti ' + d.icon + '"></i></span>';
+          return (
+            '<span class="sidebar-icon-badge ' +
+            d.cls +
+            '"><i class="ti ' +
+            d.icon +
+            '"></i></span>'
+          );
         }
 
         var html =
           '<button class="sidebar-item active" data-g="all" onclick="setGroupFilter(\'all\')">' +
-          '<span class="item-name">' + _iconBadge(0) + ' الكل</span>' +
+          '<span class="item-name">' +
+          _iconBadge(0) +
+          " الكل</span>" +
           '<span class="sidebar-count" id="gc-all">' +
           PUB.items.length +
           "</span></button>";
@@ -4337,8 +4349,10 @@
             _esc(g.id) +
             '" onclick="setGroupFilter(\'' +
             _esc(g.id) +
-            '\')">' +
-            '<span class="item-name">' + _iconBadge(i + 1) + ' ' +
+            "')\">" +
+            '<span class="item-name">' +
+            _iconBadge(i + 1) +
+            " " +
             _esc(g.name) +
             "</span>" +
             '<span class="sidebar-count" id="gc-' +
@@ -4435,17 +4449,29 @@
         var chips = [];
         if (PUB.groupFilter !== "all") {
           var gname = _groupName(PUB.groupFilter);
-          chips.push('<span class="active-filter-chip" onclick="setGroupFilter(\'all\')">' +
-            '📁 ' + _esc(gname) + ' <span style="font-size:10px;opacity:.7">✕</span></span>');
+          chips.push(
+            '<span class="active-filter-chip" onclick="setGroupFilter(\'all\')">' +
+              "📁 " +
+              _esc(gname) +
+              ' <span style="font-size:10px;opacity:.7">✕</span></span>',
+          );
         }
         if (PUB.statusFilter !== "all") {
           var slabel = PUB.statusFilter === "avail" ? "متاح" : "محدود";
-          chips.push('<span class="active-filter-chip" onclick="setStatusFilter(\'all\')">' +
-            '🔖 ' + slabel + ' <span style="font-size:10px;opacity:.7">✕</span></span>');
+          chips.push(
+            '<span class="active-filter-chip" onclick="setStatusFilter(\'all\')">' +
+              "🔖 " +
+              slabel +
+              ' <span style="font-size:10px;opacity:.7">✕</span></span>',
+          );
         }
         if (PUB.searchQ) {
-          chips.push('<span class="active-filter-chip" onclick="document.getElementById(\'pub-search\').value=\'\';PUB.searchQ=\'\';document.getElementById(\'search-clear-btn\').classList.remove(\'visible\');_render();">' +
-            '🔍 ' + _esc(PUB.searchQ) + ' <span style="font-size:10px;opacity:.7">✕</span></span>');
+          chips.push(
+            "<span class=\"active-filter-chip\" onclick=\"document.getElementById('pub-search').value='';PUB.searchQ='';document.getElementById('search-clear-btn').classList.remove('visible');_render();\">" +
+              "🔍 " +
+              _esc(PUB.searchQ) +
+              ' <span style="font-size:10px;opacity:.7">✕</span></span>',
+          );
         }
         bar.innerHTML = chips.join("");
         bar.classList.toggle("visible", chips.length > 0);
@@ -4589,8 +4615,8 @@
               ? 'loading="eager" fetchpriority="high"'
               : 'loading="lazy" fetchpriority="low"') +
             ' decoding="async"' +
-            ' onload="this.classList.add(\'loaded\')"' +
-            ' onerror="this.parentElement.innerHTML=\'<div class=card-img-ph><div class=ph-icon>📦</div><div class=ph-ph-text>لا توجد صورة</div></div>\'">'
+            " onload=\"this.classList.add('loaded')\"" +
+            " onerror=\"this.parentElement.innerHTML='<div class=card-img-ph><div class=ph-icon>📦</div><div class=ph-ph-text>لا توجد صورة</div></div>'\">"
           : '<div class="card-img-ph"><div class="ph-icon">📦</div></div>';
 
         var colors = _parseColors(it.colors_json);
@@ -4694,7 +4720,9 @@
           "</div>" +
           (colorDots || priceHtml
             ? '<div class="card-colors-row">' +
-              (colorDots ? '<div class="card-colors">' + colorDots + "</div>" : "<span></span>") +
+              (colorDots
+                ? '<div class="card-colors">' + colorDots + "</div>"
+                : "<span></span>") +
               priceHtml +
               "</div>"
             : "") +
@@ -4963,9 +4991,21 @@
       }
 
       // ── Modal ────────────────────────────────────────────────────
-      var _modalState = { currentImg: "", colors: [], selectedColor: "", minOrderQty: 1, qtyStep: 1 };
+      var _modalState = {
+        currentImg: "",
+        colors: [],
+        selectedColor: "",
+        minOrderQty: 1,
+        qtyStep: 1,
+      };
       var _gallerySlideTimer = null;
-      var _galleryState = { imgs: [], idx: 0, paused: false, front: 0, loaded: {} };
+      var _galleryState = {
+        imgs: [],
+        idx: 0,
+        paused: false,
+        front: 0,
+        loaded: {},
+      };
 
       // يعرض صورة واحدة في المعرض مع أسهم تنقل + نقاط + عداد،
       // وبيبدّل بينهم أوتوماتيك كل شوية لو فيه أكتر من صورة،
@@ -4980,8 +5020,15 @@
            نفس طبقة الـ front الحالية عشان الكروسفيد يشتغل صح، بدل ما
            نصفّرها ونضطر لعرض فوري بدون تلاشي */
         var keepFront = crossfadeIn && _galleryState ? _galleryState.front : 0;
-        var keepLoaded = crossfadeIn && _galleryState ? _galleryState.loaded : {};
-        _galleryState = { imgs: imgs, idx: 0, paused: false, front: keepFront, loaded: keepLoaded };
+        var keepLoaded =
+          crossfadeIn && _galleryState ? _galleryState.loaded : {};
+        _galleryState = {
+          imgs: imgs,
+          idx: 0,
+          paused: false,
+          front: keepFront,
+          loaded: keepLoaded,
+        };
 
         var dotsWrap = document.getElementById("gallery-dots");
         var mainWrap = document.getElementById("modal-gallery-main");
@@ -4995,8 +5042,11 @@
               ? imgs
                   .map(function (_, i) {
                     return (
-                      '<button class="gallery-dot' + (i === 0 ? " active" : "") +
-                      '" onclick="event.stopPropagation();_galleryGoTo(' + i + ')"></button>'
+                      '<button class="gallery-dot' +
+                      (i === 0 ? " active" : "") +
+                      '" onclick="event.stopPropagation();_galleryGoTo(' +
+                      i +
+                      ')"></button>'
                     );
                   })
                   .join("")
@@ -5031,7 +5081,7 @@
               touchStartX = e.touches[0].clientX;
               _galleryState.paused = true;
             },
-            { passive: true }
+            { passive: true },
           );
           mainWrap.addEventListener(
             "touchend",
@@ -5043,7 +5093,7 @@
               }
               _galleryState.paused = false;
             },
-            { passive: true }
+            { passive: true },
           );
         }
       }
@@ -5071,7 +5121,9 @@
         var backdrop = document.getElementById("gallery-zoom-backdrop");
 
         var back = _galleryState.front === 0 ? 1 : 0;
-        var layerFront = document.getElementById("modal-main-img-" + _galleryState.front);
+        var layerFront = document.getElementById(
+          "modal-main-img-" + _galleryState.front,
+        );
         var layerBack = document.getElementById("modal-main-img-" + back);
 
         var apply = function () {
@@ -5105,9 +5157,7 @@
         _modalState.currentImg = src;
         if (counterEl)
           counterEl.textContent =
-            imgs.length > 1
-              ? _galleryState.idx + 1 + " / " + imgs.length
-              : "";
+            imgs.length > 1 ? _galleryState.idx + 1 + " / " + imgs.length : "";
         document.querySelectorAll(".gallery-dot").forEach(function (d, idx) {
           d.classList.toggle("active", idx === _galleryState.idx);
         });
@@ -5156,10 +5206,15 @@
            لو الصنف عنده ألوان) */
         var allImgs = [];
         if (it.image_url) {
-          allImgs.push({ src: it.image_url, label: "الصورة الرئيسية", colorIdx: -1 });
+          allImgs.push({
+            src: it.image_url,
+            label: "الصورة الرئيسية",
+            colorIdx: -1,
+          });
         }
         colors.forEach(function (c, i) {
-          var imgs = c.images && c.images.length ? c.images : (c.image ? [c.image] : []);
+          var imgs =
+            c.images && c.images.length ? c.images : c.image ? [c.image] : [];
           imgs.forEach(function (src, j) {
             // تجنّب تكرار نفس الصورة لو صورة اللون هي نفسها الصورة
             // الرئيسية بالظبط (مفيش داعي تتكرر مرتين في المعرض)
@@ -5192,14 +5247,16 @@
             '<div class="modal-zoom-hint"><i class="ti ti-zoom-in" style="font-size:13px;margin-left:4px"></i> اضغط لتكبير الصورة</div>' +
             "</div></div>";
         } else {
-          galleryHtml = '<div class="modal-gallery"><div class="modal-gallery-main"><div class="modal-img-ph"><i class="ti ti-box" style="font-size:48px;color:var(--text3)"></i></div></div></div>';
+          galleryHtml =
+            '<div class="modal-gallery"><div class="modal-gallery-main"><div class="modal-img-ph"><i class="ti ti-box" style="font-size:48px;color:var(--text3)"></i></div></div></div>';
         }
 
         /* price */
         var priceBlock =
           !PUB.urlNoprices && it.selling_price && Number(it.selling_price) > 0
             ? '<div class="modal-meta-item"><div class="m-label">السعر</div><div class="m-val" style="color:var(--warning)"><i class="ti ti-coin" style="font-size:13px;margin-left:3px"></i>' +
-              Number(it.selling_price).toLocaleString("en-US") + " ج.م</div></div>"
+              Number(it.selling_price).toLocaleString("en-US") +
+              " ج.م</div></div>"
             : "";
 
         /* color picker */
@@ -5209,20 +5266,39 @@
             '<div style="margin-bottom:16px">' +
             '<div class="modal-section-title"><i class="ti ti-palette" style="margin-left:6px"></i> اختر اللون</div>' +
             '<div class="modal-colors-wrap" id="modal-color-cards">' +
-            colors.map(function (c, i) {
-              var hex = c.hex || COLOR_HEX_MAP[c.code] || _guessHex(c.name) || "#94a3b8";
-              var swatchInner = c.image ? '<img src="' + _esc(c.image) + '" onerror="this.style.display=\'none\'">' : "";
-              return (
-                '<div class="modal-color-card" data-cidx="' + i +
-                '" onclick="selectModalColor(' + i + ',this)">' +
-                '<div class="mcv-swatch-wrap">' +
-                '<div class="mcv-swatch" style="background:' + hex + '">' + swatchInner + "</div>" +
-                '<div class="mcv-check">✓</div>' +
-                "</div>" +
-                '<div class="mcv-name">' + _esc(c.name) + "</div>" +
-                "</div>"
-              );
-            }).join("") +
+            colors
+              .map(function (c, i) {
+                var hex =
+                  c.hex ||
+                  COLOR_HEX_MAP[c.code] ||
+                  _guessHex(c.name) ||
+                  "#94a3b8";
+                var swatchInner = c.image
+                  ? '<img src="' +
+                    _esc(c.image) +
+                    '" onerror="this.style.display=\'none\'">'
+                  : "";
+                return (
+                  '<div class="modal-color-card" data-cidx="' +
+                  i +
+                  '" onclick="selectModalColor(' +
+                  i +
+                  ',this)">' +
+                  '<div class="mcv-swatch-wrap">' +
+                  '<div class="mcv-swatch" style="background:' +
+                  hex +
+                  '">' +
+                  swatchInner +
+                  "</div>" +
+                  '<div class="mcv-check">✓</div>' +
+                  "</div>" +
+                  '<div class="mcv-name">' +
+                  _esc(c.name) +
+                  "</div>" +
+                  "</div>"
+                );
+              })
+              .join("") +
             "</div>" +
             '<div class="modal-selected-color" id="modal-sel-color-bar">' +
             '<div class="modal-color-swatch" id="modal-sel-swatch"></div>' +
@@ -5237,21 +5313,35 @@
         var _qStep = Math.max(1, Number(_modalState.qtyStep || 1));
         var _moqHintParts = [];
         if (_moq > 1)
-          _moqHintParts.push("أقل كمية للطلب: " + _moq + " " + (it.unit ? _esc(it.unit) : "قطعة"));
+          _moqHintParts.push(
+            "أقل كمية للطلب: " +
+              _moq +
+              " " +
+              (it.unit ? _esc(it.unit) : "قطعة"),
+          );
         if (_qStep > 1)
-          _moqHintParts.push("الكمية بتزيد/بتقل بمضاعفات " + _qStep + " (حسب المقاسات)");
+          _moqHintParts.push(
+            "الكمية بتزيد/بتقل بمضاعفات " + _qStep + " (حسب المقاسات)",
+          );
         var orderSection = canOrder
           ? '<div class="modal-order">' +
             '<h4><i class="ti ti-shopping-cart" style="margin-left:6px"></i>أضف إلى طلبك</h4>' +
             (_moqHintParts.length
               ? '<div class="modal-moq-hint" id="modal-moq-hint" style="font-size:12.5px;color:var(--text2);margin-bottom:8px"><i class="ti ti-info-circle" style="font-size:13px;margin-left:4px"></i>' +
-                _moqHintParts.join(" · ") + "</div>"
+                _moqHintParts.join(" · ") +
+                "</div>"
               : "") +
             '<div class="order-row">' +
             '<span class="order-label">الكمية:</span>' +
             '<div class="qty-stepper" id="qty-stepper">' +
             '<button type="button" class="qty-step-btn qty-step-minus" id="qty-minus" aria-label="تقليل الكمية">−</button>' +
-            '<input type="number" id="modal-qty" class="order-input qty-input" min="' + _moq + '" step="' + _qStep + '" value="' + _moq + '" inputmode="numeric">' +
+            '<input type="number" id="modal-qty" class="order-input qty-input" min="' +
+            _moq +
+            '" step="' +
+            _qStep +
+            '" value="' +
+            _moq +
+            '" inputmode="numeric">' +
             '<button type="button" class="qty-step-btn qty-step-plus" id="qty-plus" aria-label="زيادة الكمية">+</button>' +
             "</div>" +
             "</div>" +
@@ -5264,10 +5354,16 @@
 
         // ── بناء محتوى الـ drawer ──
         var headerLeft =
-          "<h2>" + _esc(it.name || "") + "</h2>" +
+          "<h2>" +
+          _esc(it.name || "") +
+          "</h2>" +
           (it.code
-            ? '<span class="modal-code-badge" onclick="_copyCode(\'' + _esc(it.code) + '\')" title="انقر لنسخ الكود">' +
-              '<i class="ti ti-copy" style="font-size:11px"></i>' + _esc(it.code) + "</span>"
+            ? '<span class="modal-code-badge" onclick="_copyCode(\'' +
+              _esc(it.code) +
+              '\')" title="انقر لنسخ الكود">' +
+              '<i class="ti ti-copy" style="font-size:11px"></i>' +
+              _esc(it.code) +
+              "</span>"
             : "") +
           (badge ? " " + badge : "");
 
@@ -5276,19 +5372,34 @@
           galleryHtml +
           '<div class="modal-content">' +
           '<div class="modal-meta-grid">' +
-          '<div class="modal-meta-item"><div class="m-label">كود الصنف</div><div class="m-val mono">' + _esc(it.code || "") + "</div></div>" +
-          '<div class="modal-meta-item"><div class="m-label">المجموعة</div><div class="m-val">' + _esc(_groupName(it.group)) + "</div></div>" +
-          '<div class="modal-meta-item"><div class="m-label">وحدة القياس</div><div class="m-val">' + _esc(it.unit || "—") + "</div></div>" +
+          '<div class="modal-meta-item"><div class="m-label">كود الصنف</div><div class="m-val mono">' +
+          _esc(it.code || "") +
+          "</div></div>" +
+          '<div class="modal-meta-item"><div class="m-label">المجموعة</div><div class="m-val">' +
+          _esc(_groupName(it.group)) +
+          "</div></div>" +
+          '<div class="modal-meta-item"><div class="m-label">وحدة القياس</div><div class="m-val">' +
+          _esc(it.unit || "—") +
+          "</div></div>" +
           (it.sizes && String(it.sizes).trim()
             ? '<div class="modal-meta-item"><div class="m-label">المقاسات المتاحة</div><div class="m-val">' +
-              _esc(String(it.sizes).split(",").map(function (s) { return s.trim(); }).filter(Boolean).join(", ")) +
+              _esc(
+                String(it.sizes)
+                  .split(",")
+                  .map(function (s) {
+                    return s.trim();
+                  })
+                  .filter(Boolean)
+                  .join(", "),
+              ) +
               "</div></div>"
             : "") +
           priceBlock +
           "</div>" +
           (it.description
             ? '<p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px;padding:12px 14px;background:var(--surface2);border-radius:var(--radius);border:1px solid var(--border)">' +
-              _esc(it.description) + "</p>"
+              _esc(it.description) +
+              "</p>"
             : "") +
           colorPickerHtml +
           orderSection +
@@ -5309,7 +5420,9 @@
             // رد فعل بصري فوري (نبضة سريعة) — بيثبت إن الضغطة فعلاً
             // وصلت لعنصر الزرار نفسه، بغض النظر عن نتيجة الفاليديشن
             // اللي جوه addToCartFromModal (مفيد جداً للتشخيص)
-            console.info("🖱️ تم رصد ضغطة فعلية على زرار أضف للسلة — جاري التنفيذ...");
+            console.info(
+              "🖱️ تم رصد ضغطة فعلية على زرار أضف للسلة — جاري التنفيذ...",
+            );
             _addBtn.style.transform = "scale(0.96)";
             setTimeout(function () {
               _addBtn.style.transform = "";
@@ -5322,7 +5435,11 @@
         _bindQtyStepper();
 
         // شغّل معرض الصور (صورة واحدة + سلايدشو تلقائي لو أكتر من صورة)
-        _setGalleryImages(allImgs.map(function (img) { return img.src; }));
+        _setGalleryImages(
+          allImgs.map(function (img) {
+            return img.src;
+          }),
+        );
 
         // open animation
         var backdrop = document.getElementById("drawer-backdrop");
@@ -5349,7 +5466,9 @@
       }
 
       // للتوافق مع الكود القديم
-      function openModal(id) { openDrawer(id); }
+      function openModal(id) {
+        openDrawer(id);
+      }
 
       /* color card selection */
       function selectModalColor(idx, cardEl) {
@@ -5374,7 +5493,8 @@
         }
 
         /* if this color has image(s), play them as a slideshow */
-        var cImgs = c.images && c.images.length ? c.images : (c.image ? [c.image] : []);
+        var cImgs =
+          c.images && c.images.length ? c.images : c.image ? [c.image] : [];
         if (cImgs.length) {
           _setGalleryImages(cImgs, true); /* كروسفيد سلس بدل القفزة الفورية */
         }
@@ -5479,7 +5599,8 @@
           minusBtn.addEventListener("click", function () {
             var step = Math.max(1, Number(_modalState.qtyStep || 1));
             var current = parseInt(input.value, 10);
-            if (isNaN(current)) current = Math.max(1, Number(_modalState.minOrderQty || 1));
+            if (isNaN(current))
+              current = Math.max(1, Number(_modalState.minOrderQty || 1));
             input.value = _clampQty(current - step);
           });
         }
@@ -5487,7 +5608,8 @@
           plusBtn.addEventListener("click", function () {
             var step = Math.max(1, Number(_modalState.qtyStep || 1));
             var current = parseInt(input.value, 10);
-            if (isNaN(current)) current = Math.max(1, Number(_modalState.minOrderQty || 1));
+            if (isNaN(current))
+              current = Math.max(1, Number(_modalState.minOrderQty || 1));
             input.value = _clampQty(current + step);
           });
         }
@@ -5517,14 +5639,19 @@
         console.log("🛒[1/6] addToCartFromModal بدأ — الكود المُستلم:", code);
 
         if (!code) {
-          console.error("🛒 توقف: مفيش كود صنف اتبعت للدالة أصلاً (code فاضي).");
+          console.error(
+            "🛒 توقف: مفيش كود صنف اتبعت للدالة أصلاً (code فاضي).",
+          );
           _showToast("⚠️ خطأ داخلي: كود الصنف مفقود");
           return;
         }
 
         try {
           var added = _tryAddItemToCart(code);
-          console.log("🛒[6/6] النتيجة النهائية:", added ? "تمت الإضافة ✅" : "اتوقفت الإضافة (شوف اللوج فوق) ⛔");
+          console.log(
+            "🛒[6/6] النتيجة النهائية:",
+            added ? "تمت الإضافة ✅" : "اتوقفت الإضافة (شوف اللوج فوق) ⛔",
+          );
         } catch (err) {
           console.error("🛒 استثناء غير متوقع جوه addToCartFromModal:", err);
           _showToast("⚠️ حصل خطأ أثناء الإضافة للسلة — جرب تاني أو بلّغ الدعم");
@@ -5536,22 +5663,35 @@
         var _item = PUB.items.find(function (x) {
           return String(x.code || x.id) === String(code);
         });
-        console.log("🛒[2/6] البحث عن الصنف في PUB.items:", _item ? "لُقي ✔" : "مش موجود ⚠ (هيتضاف بالكود بس)");
+        console.log(
+          "🛒[2/6] البحث عن الصنف في PUB.items:",
+          _item ? "لُقي ✔" : "مش موجود ⚠ (هيتضاف بالكود بس)",
+        );
 
-        var name = _item ? (_item.name || "") : code;
-        var imageUrl = _item ? (_item.image_url || "") : "";
+        var name = _item ? _item.name || "" : code;
+        var imageUrl = _item ? _item.image_url || "" : "";
 
         var qtyInput = document.getElementById("modal-qty");
         var qty = parseInt((qtyInput || {}).value || "1", 10);
         if (isNaN(qty) || qty < 1) qty = 1;
 
         var color = _modalState.selectedColor || "";
-        console.log("🛒[3/6] الكمية المطلوبة:", qty, "| اللون المختار:", color || "(بدون لون)");
+        console.log(
+          "🛒[3/6] الكمية المطلوبة:",
+          qty,
+          "| اللون المختار:",
+          color || "(بدون لون)",
+        );
 
         // ── تحقق 1: أقل كمية للطلب ─────────────────────────────
         var _moq = Math.max(1, Number(_modalState.minOrderQty || 1));
         if (qty < _moq) {
-          console.warn("🛒 توقف عند تحقق [أقل كمية]: الكمية", qty, "أقل من الحد الأدنى", _moq);
+          console.warn(
+            "🛒 توقف عند تحقق [أقل كمية]: الكمية",
+            qty,
+            "أقل من الحد الأدنى",
+            _moq,
+          );
           _flashInvalid(qtyInput, _moq);
           _showToast("⚠️ أقل كمية للطلب على هذا الصنف: " + _moq);
           return false;
@@ -5562,15 +5702,31 @@
         if (_qStep > 1 && qty % _qStep !== 0) {
           var _nearest = Math.round(qty / _qStep) * _qStep;
           if (_nearest < _moq) _nearest = _moq;
-          console.warn("🛒 توقف عند تحقق [مضاعف الطقم]: الكمية", qty, "مش مضاعف لـ", _qStep, "— أقرب قيمة:", _nearest);
+          console.warn(
+            "🛒 توقف عند تحقق [مضاعف الطقم]: الكمية",
+            qty,
+            "مش مضاعف لـ",
+            _qStep,
+            "— أقرب قيمة:",
+            _nearest,
+          );
           _flashInvalid(qtyInput, _nearest);
-          _showToast("⚠️ الكمية لازم تكون من مضاعفات " + _qStep + " — تم التعديل لأقرب مضاعف: " + _nearest);
+          _showToast(
+            "⚠️ الكمية لازم تكون من مضاعفات " +
+              _qStep +
+              " — تم التعديل لأقرب مضاعف: " +
+              _nearest,
+          );
           return false;
         }
 
         // ── تحقق 3: اختيار اللون لو الصنف عنده ألوان ────────────
         if (_modalState.colors && _modalState.colors.length > 0 && !color) {
-          console.warn("🛒 توقف عند تحقق [اللون]: الصنف عنده", _modalState.colors.length, "لون ولسه محددش لون.");
+          console.warn(
+            "🛒 توقف عند تحقق [اللون]: الصنف عنده",
+            _modalState.colors.length,
+            "لون ولسه محددش لون.",
+          );
           _flashInvalid(document.getElementById("modal-color-cards"));
           _showToast("⚠️ من فضلك اختر اللون أولاً");
           return false;
@@ -5584,7 +5740,11 @@
             return c.name === color;
           });
           if (found) {
-            colorHex = found.hex || COLOR_HEX_MAP[found.code] || _guessHex(found.name) || "#94a3b8";
+            colorHex =
+              found.hex ||
+              COLOR_HEX_MAP[found.code] ||
+              _guessHex(found.name) ||
+              "#94a3b8";
             colorImage = found.image || "";
           }
         }
@@ -5598,7 +5758,10 @@
           existing.qty += qty;
           existing.minOrderQty = _moq;
           existing.qtyStep = _qStep;
-          console.log("🛒[4/6] الصنف موجود بالفعل في السلة بنفس اللون — تم تجميع الكمية. الإجمالي الآن:", existing.qty);
+          console.log(
+            "🛒[4/6] الصنف موجود بالفعل في السلة بنفس اللون — تم تجميع الكمية. الإجمالي الآن:",
+            existing.qty,
+          );
         } else {
           CART.push({
             code: code,
@@ -5610,7 +5773,10 @@
             minOrderQty: _moq,
             qtyStep: _qStep,
           });
-          console.log("🛒[4/6] صف جديد اتضاف للسلة. إجمالي أصناف السلة الآن:", CART.length);
+          console.log(
+            "🛒[4/6] صف جديد اتضاف للسلة. إجمالي أصناف السلة الآن:",
+            CART.length,
+          );
         }
 
         console.log("🛒[5/6] هيتم استدعاء _updateCartUI() لتحديث الواجهة...");
@@ -5640,7 +5806,8 @@
             { duration: 380, easing: "ease-in-out" },
           );
         }
-        if (correctedValue !== undefined && "value" in el) el.value = correctedValue;
+        if (correctedValue !== undefined && "value" in el)
+          el.value = correctedValue;
         setTimeout(function () {
           el.style.outline = "";
         }, 1800);
@@ -5706,7 +5873,8 @@
           mobileCount.textContent = CART.length + " صنف في السلة";
         }
         if (mobileSub && total > 0) {
-          mobileSub.textContent = "إجمالي " + total + " قطعة — اضغط للمراجعة والإرسال";
+          mobileSub.textContent =
+            "إجمالي " + total + " قطعة — اضغط للمراجعة والإرسال";
         }
 
         _renderCartItems();
@@ -5757,13 +5925,17 @@
             '<div class="cart-item-qty-row">' +
             '<button class="qty-btn" onclick="cartQty(' +
             idx +
-            ',' + -(item.qtyStep || 1) + ')">−</button>' +
+            "," +
+            -(item.qtyStep || 1) +
+            ')">−</button>' +
             '<span class="qty-num">' +
             item.qty +
             "</span>" +
             '<button class="qty-btn" onclick="cartQty(' +
             idx +
-            ',' + (item.qtyStep || 1) + ')">+</button>' +
+            "," +
+            (item.qtyStep || 1) +
+            ')">+</button>' +
             '<span style="font-size:11px;color:var(--text3);margin-right:6px">قطعة</span>' +
             "</div></div>" +
             '<button class="cart-item-remove" title="حذف" onclick="cartRemove(' +
@@ -5779,7 +5951,11 @@
         var _moq = Math.max(1, Number(CART[idx].minOrderQty || 1));
         var _newQty = CART[idx].qty + delta;
         if (delta < 0 && _newQty < _moq) {
-          _showToast("⚠️ أقل كمية للطلب على هذا الصنف: " + _moq + " — استخدم زر الحذف لإزالته");
+          _showToast(
+            "⚠️ أقل كمية للطلب على هذا الصنف: " +
+              _moq +
+              " — استخدم زر الحذف لإزالته",
+          );
           return;
         }
         CART[idx].qty = _newQty;
@@ -5839,7 +6015,7 @@
             isHorizontal = null;
             panelEl.style.transition = "none";
           },
-          { passive: true }
+          { passive: true },
         );
 
         panelEl.addEventListener(
@@ -5866,7 +6042,7 @@
             panelEl.style.transform = "translateX(" + moved + "px)";
             e.preventDefault();
           },
-          { passive: false }
+          { passive: false },
         );
 
         function endDrag() {
@@ -5882,8 +6058,14 @@
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        _enableSwipeToClose(document.getElementById("item-drawer"), closeDrawer);
-        _enableSwipeToClose(document.getElementById("cart-panel"), closeCartPanel);
+        _enableSwipeToClose(
+          document.getElementById("item-drawer"),
+          closeDrawer,
+        );
+        _enableSwipeToClose(
+          document.getElementById("cart-panel"),
+          closeCartPanel,
+        );
       });
 
       function sendCartWhatsApp() {
@@ -5975,7 +6157,13 @@
                 images: images,
               };
             }
-            return { name: String(c), code: "", hex: "", image: "", images: [] };
+            return {
+              name: String(c),
+              code: "",
+              hex: "",
+              image: "",
+              images: [],
+            };
           });
         } catch (e) {
           return [];
