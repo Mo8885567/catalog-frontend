@@ -1,0 +1,8 @@
+# كتالوج عام — Netlify Redirects
+
+# اختصارات بدون .html
+/catalog   /catalog.html   200
+/admin     /index.html     200
+
+# الصفحة الرئيسية (بدون مسار) = لوحة الإدارة
+/          /index.html     200
