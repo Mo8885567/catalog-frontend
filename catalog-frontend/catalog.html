@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" href="assets/logo/favicon-192.png" />
     <meta
       name="description"
-      content="كتالوج المنتجات الرسمي — MOO.ERP Enterprise Resource Planning"
+      content="كتالوج المنتجات الرسمي — Kero Man"
     />
     <link
       href="assets/fonts/fonts.css"
@@ -3441,14 +3441,14 @@
             <!-- لوجو الشركة — يتحدث ديناميكياً من الإعدادات -->
             <img
               id="brand-logo-img"
-              src=""
+              src="assets/logo/favicon-192.png"
               alt="لوجو الشركة"
               style="
                 width: 42px;
                 height: 42px;
                 object-fit: contain;
                 border-radius: 10px;
-                display: none;
+                display: block;
               "
               onerror="
                 this.style.display = 'none';
@@ -3456,7 +3456,7 @@
                   'block';
               "
             />
-            <!-- SVG افتراضي — يظهر لو مفيش لوجو محدد -->
+            <!-- SVG افتراضي — يظهر بس لو الصورة فشلت في التحميل -->
             <svg
               id="brand-logo-svg"
               viewBox="0 0 72 72"
@@ -3464,6 +3464,7 @@
               xmlns="http://www.w3.org/2000/svg"
               width="42"
               height="42"
+              style="display: none"
             >
               <rect width="72" height="72" rx="14" fill="#0d1f3c" />
               <rect x="4" y="52" width="64" height="4" rx="2" fill="#1e3a5f" />
@@ -3562,7 +3563,7 @@
             </svg>
           </div>
           <div class="brand-info brand-loading" id="brand-info">
-            <h1 id="brand-company-name">MOO.ERP</h1>
+            <h1 id="brand-company-name">Kero Man</h1>
             <p id="brand-tagline">كتالوج المنتجات الرسمي</p>
           </div>
         </a>
@@ -3737,7 +3738,7 @@
             <div class="loader-dot"></div>
           </div>
           <div class="loading-text">جاري تحميل الكتالوج...</div>
-          <div class="loading-sub">MOO.ERP — كتالوج المنتجات الرسمي</div>
+          <div class="loading-sub">Kero Man — كتالوج المنتجات الرسمي</div>
           <div class="loader-bar-wrap">
             <div class="loader-bar"></div>
           </div>
@@ -3949,7 +3950,7 @@
         statusFilter: "all",
         sortMode: "default",
         WHATSAPP_NUMBER: "201025306678",
-        SHOP_NAME: "MOO.ERP",
+        SHOP_NAME: "Kero Man",
         urlGroups: _URL_GROUPS
           .split(",")
           .map(function (s) {
